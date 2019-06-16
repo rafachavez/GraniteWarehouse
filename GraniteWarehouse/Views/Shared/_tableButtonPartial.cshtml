@@ -1,0 +1,14 @@
+﻿@model int
+@{
+    Layout = null;
+}
+
+    
+    <td style="width:150px">
+        <div class="btn-group" role="group">
+            <a type="button" class="btn btn-primary" href="@Url.Action("Edit/"+ Model)"> </a>
+            <a type="button" class="btn btn-success" href="@Url.Action("Details/"+ Model)"> </a>
+            <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+ Model)"> </a>
+        </div>
+    </td>
+    
