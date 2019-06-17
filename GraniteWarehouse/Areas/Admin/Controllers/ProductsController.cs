@@ -33,5 +33,10 @@ namespace GraniteWarehouse.Areas.Admin.Controllers
             var products = _db.Products.Include(m => m.ProductTypes).Include(m => m.SpecialTags);
             return View(await products.ToListAsync());
         }
+
+        public IActionResult Create()
+        {
+            return View(ProductsVM);
+        }
     }
 }
