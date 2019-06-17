@@ -6,6 +6,7 @@ using GraniteWarehouse.Data;
 using GraniteWarehouse.Models;
 using GraniteWarehouse.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GraniteWarehouse.Areas.Admin.Controllers
 {
@@ -27,9 +28,10 @@ namespace GraniteWarehouse.Areas.Admin.Controllers
             };
         }
         
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var products = _db.Products.Include(m => m.ProductTypes).Include(m => m.SpecialTags);
+            return View(await products.ToListAsync());
         }
     }
 }

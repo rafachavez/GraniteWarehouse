@@ -27,7 +27,7 @@ namespace GraniteWarehouse.Models
         //below, this is a way to link the tables if the tables already exist or if i want to override the standard behavior
 
         [ForeignKey("ProductTypeId")]
-        public virtual ProductTypes ProductsTypes { get; set; } //we are assuming the table already exists
+        public virtual ProductTypes ProductTypes { get; set; } //we are assuming the table already exists
 
         [Display(Name = "Special Tag")]
         public int SpecialTagsId { get; set; } //same as above but for the SpecialTags table
