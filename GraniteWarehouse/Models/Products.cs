@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GraniteWarehouse.Models
 {
-    public class Product
+    public class Products
     {
         public int Id { get; set; }
 
