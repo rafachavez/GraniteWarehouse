@@ -15,6 +15,7 @@ namespace GraniteWarehouse.Areas.Admin.Controllers
     {
         private readonly ApplicationDbContext _db; // this is for dependency injection
 
+        [BindProperty]
         public ProductViewModels ProductsVM { get; set; }
 
         public ProductsController(ApplicationDbContext db) // contructor
