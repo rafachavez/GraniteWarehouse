@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Schema;
+using System.Xml.XPath;
 using GraniteWarehouse.Data;
 using GraniteWarehouse.Models;
 using GraniteWarehouse.Models.ViewModels;
+using GraniteWarehouse.Utility;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +19,7 @@ namespace GraniteWarehouse.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _db; // this is for dependency injection
+        private readonly HostingEnvironment _hostingEnvironment;
 
         [BindProperty]
         public ProductViewModels ProductsVM { get; set; }
@@ -35,9 +41,51 @@ namespace GraniteWarehouse.Areas.Admin.Controllers
             return View(await products.ToListAsync());
         }
 
+        //get product create
         public IActionResult Create()
         {
             return View(ProductsVM);
+        }
+
+        //post product create
+        [HttpPost, ActionName("Create")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreatePOST() //we have a bindproperty so need to take parameters
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(ProductsVM);
+            }
+
+            _db.Products.Add(ProductsVM.Products);
+            await _db.SaveChangesAsync();
+
+            //product was  saved, but  the physical image...
+
+
+            //save physical image
+
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            var files = HttpContext.Request.Form.Files;
+
+            var productsFromDb = _db.Products.Find(ProductsVM.Products.Id);
+
+            if(files.Count != 0)
+            {
+                //image has been uploaded with form
+
+                var uploads = Path.Combine(webRootPath, SD.ImageFolder);
+                var extension = Path.GetExtension(files[0].FileName);
+
+                using (var filestream = new FileStream(Path.Combine(uploads, ProductsVM.Products.Id + extension), FileMode.Create))
+                {
+                    files[0].CopyTo(filestream); //moves to server and renames
+                }
+
+                //now i know that new image name, so i can save the string  image to the database
+
+                productsFromDb.Image = @"\" + SD.ImageFolder + @"\" + ProductsVM.Products.Id + extension;
+            }
         }
     }
 }
