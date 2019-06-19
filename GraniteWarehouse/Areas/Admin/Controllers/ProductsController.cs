@@ -23,7 +23,6 @@ namespace GraniteWarehouse.Areas.Admin.Controllers
 
         [BindProperty]
         public ProductViewModels ProductsVM { get; set; }
-
         public ProductsController(ApplicationDbContext db) // contructor
         {
             _db = db;
