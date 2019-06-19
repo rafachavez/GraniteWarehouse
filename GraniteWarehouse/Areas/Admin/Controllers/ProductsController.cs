@@ -23,9 +23,10 @@ namespace GraniteWarehouse.Areas.Admin.Controllers
 
         [BindProperty]
         public ProductViewModels ProductsVM { get; set; }
-        public ProductsController(ApplicationDbContext db) // contructor
+        public ProductsController(ApplicationDbContext db, HostingEnvironment hostingEnvironment) // contructor
         {
             _db = db;
+            _hostingEnvironment = hostingEnvironment;
             ProductsVM = new ProductViewModels() //initialize the viewmodel
             {
                 ProductTypes = _db.ProductTypes.ToList(),
