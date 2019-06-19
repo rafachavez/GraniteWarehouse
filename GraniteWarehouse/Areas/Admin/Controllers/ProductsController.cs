@@ -91,7 +91,7 @@ namespace GraniteWarehouse.Areas.Admin.Controllers
             {
                 //user didn't provide a pic, so we can use a placeholder
                 var uploads = Path.Combine(webRootPath, SD.ImageFolder + @"\" + SD.DefaultProductImage);
-                System.IO.File.Copy(uploads, webRootPath + @"\" + ProductsVM.Products.Id + ".jpg");
+                System.IO.File.Copy(uploads, webRootPath + @"\" + SD.ImageFolder + @"\" + ProductsVM.Products.Id + ".jpg");
                 productsFromDb.Image = @"\" + SD.ImageFolder + @"\" + ProductsVM.Products.Id + ".jpg";
             }
 

@@ -46,7 +46,7 @@
                 <label asp-for="Products.ProductTypes"></label>
             </div>
             <div class="col-5">
-                <select asp-for="@Model.Products.ProductTypeId" asp-items="Model.ProductTypes.ToSelectListItem(Model.Products.ProductTypeId)" class="form-control"/>
+                <select asp-for="@Model.Products.ProductTypeId" asp-items="@Model.ProductTypes.ToSelectListItem(Model.Products.ProductTypeId)" class="form-control"> </select>
             </div>
             
         </div>
@@ -56,7 +56,7 @@
                 <label asp-for="Products.SpecialTags"></label>
             </div>
             <div class="col-5">
-                <select asp-for="@Model.Products.SpecialTagsId" asp-items="Model.SpecialTags.ToSelectListItem(Model.Products.SpecialTagsId)" class="form-control" />
+                <select asp-for="@Model.Products.SpecialTagsId" asp-items="@Model.SpecialTags.ToSelectListItem(Model.Products.SpecialTagsId)" class="form-control"> </select>
             </div>
            
         </div>
