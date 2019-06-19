@@ -158,14 +158,33 @@ namespace GraniteWarehouse.Areas.Admin.Controllers
                 productFromDb.Price = ProductsVM.Products.Price;
                 productFromDb.Available = ProductsVM.Products.Available;
                 productFromDb.ProductTypeId = ProductsVM.Products.ProductTypeId;
-                productFromDb.SpecialTagsID = ProductsVM.Products.SpecialTagsID;
-                productFromDb.ShadeColor = ProductsVM.Products.ShadeColor;
+                productFromDb.SpecialTagsId = ProductsVM.Products.SpecialTagsId;
+                productFromDb.ShaderColor = ProductsVM.Products.ShaderColor;
                 await _db.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
 
             return View(ProductsVM);
+        }
+
+        //Get details
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ProductsVM.Products = await _db.Products.Include(m => m.SpecialTags).Include(m => m.ProductTypes).SingleOrDefaultAsync(m => m.Id == id);
+
+            if (ProductsVM.Products == null)
+            {
+                return NotFound();
+            }
+
+            return View(ProductsVM);
+
         }
 
     }
