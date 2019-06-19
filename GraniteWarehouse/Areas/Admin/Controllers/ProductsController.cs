@@ -86,6 +86,17 @@ namespace GraniteWarehouse.Areas.Admin.Controllers
 
                 productsFromDb.Image = @"\" + SD.ImageFolder + @"\" + ProductsVM.Products.Id + extension;
             }
+
+            else
+            {
+                //user didn't provide a pic, so we can use a placeholder
+                var uploads = Path.Combine(webRootPath, SD.ImageFolder + @"\" + SD.DefaultProductImage);
+                System.IO.File.Copy(uploads, webRootPath + @"\" + ProductsVM.Products.Id + ".jpg");
+                productsFromDb.Image = @"\" + SD.ImageFolder + @"\" + ProductsVM.Products.Id + ".jpg";
+            }
+
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
