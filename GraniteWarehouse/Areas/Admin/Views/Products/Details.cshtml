@@ -16,7 +16,7 @@
                     <label asp-for="Products.Name"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Products.Name" class="form-control" />
+                    <input asp-for="Products.Name" readonly class="form-control" />
                 </div>
                 
             </div>
@@ -26,7 +26,7 @@
                     <label asp-for="Products.Price"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Products.Price" class="form-control" />
+                    <input asp-for="Products.Price" readonly class="form-control" />
                 </div>
                 
             </div>
@@ -36,7 +36,7 @@
                     <label asp-for="Products.Image"></label>
                 </div>
                 <div class="col-8">
-                    <input type="file" name="files" class="form-control" />
+                    <input type="file" name="files" readonly class="form-control" />
                 </div>
 
             </div>
@@ -47,7 +47,7 @@
                     <label asp-for="Products.ProductTypes"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Products.ProductTypes.Name" class="form-control"/>
+                    <input asp-for="Products.ProductTypes.Name" readonly class="form-control"/>
                 </div>
 
             </div>
@@ -57,7 +57,7 @@
                     <label asp-for="Products.SpecialTags"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Products.SpecialTags.Name" class="form-control" />
+                    <input asp-for="Products.SpecialTags.Name" readonly class="form-control" />
                 </div>
 
             </div>
@@ -67,7 +67,7 @@
                     <label asp-for="Products.ShaderColor"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Products.ShaderColor" class="form-control" />
+                    <input asp-for="Products.ShaderColor" readonly class="form-control" />
                 </div>
                 
             </div>
@@ -77,7 +77,7 @@
                     <label asp-for="Products.Available"></label>
                 </div>
                 <div class="col-8">
-                    <input type="checkbox" asp-for="Products.Available" class="form-control" />
+                    <input type="checkbox" asp-for="Products.Available" disabled class="form-control" />
                 </div>
                 
             </div>
@@ -94,7 +94,7 @@
 
         <br />
         <div class="form-group">
-            <a asp-action="Edit" asp-route="@Model.Products.Id"  class="btn btn-primary">Edit</a>
+            <a asp-action="Edit" asp-route-id="@Model.Products.Id"  class="btn btn-primary">Edit</a>
             <a asp-action="Index" class="btn btn-success">Back to List</a>
         </div>
     </div>
