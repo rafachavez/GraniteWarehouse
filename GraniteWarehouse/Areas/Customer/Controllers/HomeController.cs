@@ -67,7 +67,7 @@ namespace GraniteWarehouse.Controllers
             }
 
             HttpContext.Session.Set("ssShoppingCart", lstShoppingCart);
-            return RedirectToAction(nameof(index));
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()
