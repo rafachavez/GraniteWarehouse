@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using GraniteWarehouse.Models;
 using GraniteWarehouse.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using GraniteWarehouse.Extensions;
 
 namespace GraniteWarehouse.Controllers
 {
@@ -35,6 +37,21 @@ namespace GraniteWarehouse.Controllers
                                                 .Where(m => m.Id == id)
                                                 .FirstOrDefaultAsync();
             return View(product);
+        }
+
+        [HttpPost, ActionName("Details")]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> DetailsPost(int id)
+        {
+            List<int> lstShoppingCart = HttpContext.Session.Get<List<int>>("ssShoppingCart");
+            if (lstShoppingCart == null)
+            {
+                lstShoppingCart = new List<int>();
+            }
+            lstShoppingCart.Add(id);
+            HttpContext.Session.Set("ssShoppingCart", lstShoppingCart);
+
+            return RedirectToAction("Index", "Home", new { area = "Customer"});
         }
 
         public IActionResult Privacy()
